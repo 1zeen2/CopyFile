@@ -14,6 +14,16 @@
    	FROM ${dress}
   </select>
   
+  <update id="dressHitIncrement" parameterType="hashmap">
+    UPDATE ${dress} SET 
+    hit = hit + 1
+    WHERE d_no = #{d_no}
+  </update>
+  <select id="dressDetailData" parameterType="hashmap" resultType="DressVO">
+    SELECT * FROM ${dress}
+    WHERE d_no = #{d_no}
+  </select>
+  
   <select id="suitListData" resultType="Suit" parameterType="hashmap">
   	SELCET su_no, su_image, su_subject, su_price, su_delivery, su_return_exchange, su_detail_image, su_content, num
   	FROM (SELECT su_no, su_image, su_subject, su_price, su_delivery, su_return_exchange, su_detail_image, su_content, rownum as num
@@ -24,6 +34,16 @@
   <select id="suitTotalPage" resultType="int" parameterType="hashmap">
   	SELECT CEIL(COUNT(*)/10.0)
   	FROM ${suit}
+  </select>
+  
+  <update id="suitHitIncrement" parameterType="hashmap">
+    UPDATE ${suit} SET 
+    hit = hit + 1
+    WHERE su_no = #{su_no}
+  </update>
+  <select id="suitDetailData" parameterType="hashmap" resultType="DressVO">
+    SELECT * FROM ${suit}
+    WHERE su_no = #{su_no}
   </select>
   
 </mapper>
